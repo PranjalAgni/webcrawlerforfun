@@ -1,0 +1,26 @@
+{
+  "name": "webcrawler",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "cluster": "bun run src/cluster.ts",
+    "monitor": "bun run src/monitor.ts",
+    "reset": "bun run src/redis-reset.ts"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/bun": "latest",
+    "@types/cli-progress": "^3.11.6"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "cheerio": "^1.1.2",
+    "cli-progress": "^3.12.0",
+    "ioredis": "^5.6.1",
+    "ora": "^8.2.0"
+  }
+}
