@@ -34,7 +34,11 @@ while (true) {
         const { text, links, statusCode } = await crawl(url);
         console.log(`⚽ Links found for ${url}:`, links.length);
         await insertPage(url, text, statusCode);
-        await enqueue(links, depth + 1);
+        const count = await redis.get("crawler:processed")!;
+        if (Number(count) > 1000) {
+          await enqueue(links, depth + 1);
+        }
+
         await redis.xack("frontier", GROUP, id);
         await redis.incr("crawler:processed");
       } catch (err) {
