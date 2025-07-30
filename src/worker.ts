@@ -5,6 +5,7 @@ import { insertPage } from "./sqlite";
 
 const GROUP = "crawlers";
 const NAME = "w-" + process.pid;
+const MAX_PROCESS = 100;
 
 await redis
   .xgroup("CREATE", "frontier", GROUP, "$", "MKSTREAM")
@@ -34,8 +35,9 @@ while (true) {
         const { text, links, statusCode } = await crawl(url);
         console.log(`⚽ Links found for ${url}:`, links.length);
         await insertPage(url, text, statusCode);
-        const count = await redis.get("crawler:processed")!;
-        if (Number(count) > 1000) {
+        const totalSeen = Number((await redis.get("crawler:urlcount")) || 0);
+        // only enquing up to MAX_PROCESS
+        if (totalSeen <= MAX_PROCESS) {
           await enqueue(links, depth + 1);
         }
 

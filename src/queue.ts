@@ -7,5 +7,6 @@ export async function enqueue(urls: string[], depth: number) {
   }
 
   await pipe.exec();
+  await redis.incrby("crawler:urlcount", urls.length);
   console.log(`🐢  Added ${urls.length} urls to the queue`);
 }
