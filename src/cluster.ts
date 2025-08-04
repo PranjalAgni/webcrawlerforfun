@@ -17,7 +17,6 @@ function start() {
   child.exited.then(() => {
     children.delete(child);
     console.log("💥 worker exited – respawning");
-    // start();
   });
 }
 
