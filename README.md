@@ -4,6 +4,8 @@
 
 A high-performance, distributed web crawler built with Bun and TypeScript, designed for crawling fitness and CrossFit related websites. Features Redis-based job queuing, SQLite storage with full-text search, and support for parallel processing.
 
+Writing this on 20th august
+
 ## 🚀 Features
 
 - **Distributed Crawling**: Uses Redis Streams for job queuing and worker coordination
