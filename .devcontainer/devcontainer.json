@@ -1,0 +1,33 @@
+{
+  "name": "webcrawler (bun + redis)",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/webcrawler",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "oven.bun-vscode",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.formatOnSave": true,
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
+  },
+
+  "postCreateCommand": "command -v bun && bun --version && bun install",
+  "postStartCommand": "echo 'Devcontainer ready. Try: bun run start'",
+
+  "forwardPorts": [6379],
+  "portsAttributes": {
+    "6379": {
+      "label": "redis"
+    }
+  },
+
+  "remoteUser": "vscode"
+}
